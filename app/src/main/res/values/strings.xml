@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Hoodie</string>
+
+    <string name="search_result_size">result: %d</string>
+    <string name="document_group">group: %s</string>
+    <string name="document_artifact">artifact: %s</string>
+    <string name="document_latestVersion">latestVersion: %s</string>
+</resources>
