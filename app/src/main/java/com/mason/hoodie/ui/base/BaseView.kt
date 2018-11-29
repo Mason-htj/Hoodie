@@ -1,4 +1,4 @@
-package com.mason.hoodie.ui
+package com.mason.hoodie.ui.base
 
 import android.arch.lifecycle.*
 import android.databinding.DataBindingUtil
@@ -6,6 +6,7 @@ import android.databinding.ViewDataBinding
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import com.mason.hoodie.ui.main.MainActivity
 
 /**
  * Created by mason-hong on 29/11/2018.

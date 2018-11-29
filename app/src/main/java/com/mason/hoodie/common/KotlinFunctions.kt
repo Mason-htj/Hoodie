@@ -1,6 +1,6 @@
 package com.mason.hoodie.common
 
-import com.mason.hoodie.ui.BaseView
+import com.mason.hoodie.ui.base.BaseView
 import org.koin.android.ext.android.inject
 
 /**

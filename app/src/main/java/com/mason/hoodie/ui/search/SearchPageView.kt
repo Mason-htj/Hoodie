@@ -1,18 +1,19 @@
-package com.mason.hoodie.ui
+package com.mason.hoodie.ui.search
 
 import android.arch.lifecycle.Observer
-import android.graphics.Color
 import android.support.v7.widget.DividerItemDecoration
 import com.kakao.mason.hoodie.R
 import com.kakao.mason.hoodie.databinding.ViewSearchPageBinding
 import com.mason.hoodie.common.inject
 import com.mason.hoodie.presentation.SearchViewModel
-import kotlin.random.Random
+import com.mason.hoodie.ui.DocumentListAdapter
+import com.mason.hoodie.ui.base.BasePageView
+import com.mason.hoodie.ui.main.MainActivity
 
 /**
  * Created by mason-hong on 29/11/2018.
  */
-class SearchPageView(activity: MainActivity) : BaseView(activity) {
+class SearchPageView(activity: MainActivity) : BasePageView(activity) {
     private val viewModel: SearchViewModel by inject()
     private val adapter = DocumentListAdapter()
 
@@ -27,13 +28,7 @@ class SearchPageView(activity: MainActivity) : BaseView(activity) {
         viewModel.liveRepo.observe(this, Observer {
             adapter.setItems(it ?: emptyList())
         })
-
-        contentView?.setBackgroundColor(
-            Color.rgb(
-                Random.nextInt(255),
-                Random.nextInt(255),
-                Random.nextInt(255)
-            )
-        )
     }
+
+    override fun getTitle(): String = "Search"
 }
