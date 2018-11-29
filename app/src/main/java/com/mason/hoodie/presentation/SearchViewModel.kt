@@ -1,7 +1,6 @@
 package com.mason.hoodie.presentation
 
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
@@ -12,16 +11,16 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 /**
- * Created by mason-hong on 28/11/2018.
+ * Created by mason-hong on 29/11/2018.
  */
-class MainViewModel(
+class SearchViewModel(
     private val mavenRepo: MavenRepository
-) : ViewModel() {
+) {
     val isLoadingRepo = ObservableBoolean()
-    val repositories = ObservableArrayList<Document>()
     val resultSize = ObservableInt(-1)
-
     val liveRepo = MutableLiveData<List<Document>>()
+
+    private val repositories = ObservableArrayList<Document>()
 
     fun search(query: String) {
         isLoadingRepo.set(true)
