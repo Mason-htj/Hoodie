@@ -6,15 +6,16 @@ import com.kakao.mason.hoodie.R
 import com.kakao.mason.hoodie.databinding.ViewSearchPageBinding
 import com.mason.hoodie.common.inject
 import com.mason.hoodie.presentation.SearchViewModel
+import com.mason.hoodie.ui.SearchResult
 import com.mason.hoodie.ui.base.BasePageView
 import com.mason.hoodie.ui.main.MainActivity
 
 /**
  * Created by mason-hong on 29/11/2018.
  */
-class SearchPageView(activity: MainActivity) : BasePageView(activity) {
+class SearchPageView(activity: MainActivity) : BasePageView(activity), SearchResultAdapter.Listener {
     private val viewModel: SearchViewModel by inject()
-    private val adapter = SearchResultAdapter()
+    private val adapter = SearchResultAdapter(this)
 
     override fun onCreate() {
         super.onCreate()
@@ -30,4 +31,12 @@ class SearchPageView(activity: MainActivity) : BasePageView(activity) {
     }
 
     override fun getTitle(): String = "Search"
+
+    override fun markFavorite(item: SearchResult) {
+        viewModel.markFavorite(item.document)
+    }
+
+    override fun unmarkFavorite(item: SearchResult) {
+        viewModel.unmarkFavorite(item.document)
+    }
 }

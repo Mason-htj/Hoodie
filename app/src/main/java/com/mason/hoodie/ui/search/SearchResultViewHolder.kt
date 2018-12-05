@@ -15,15 +15,19 @@ class SearchResultViewHolder private constructor(
     private val binding: ViewholderRepositoryBinding
 ) : RecyclerView.ViewHolder(binding.root) {
     companion object {
-        fun create(parent: ViewGroup): SearchResultViewHolder =
-            SearchResultViewHolder(
-                DataBindingUtil.inflate(
-                    LayoutInflater.from(parent.context),
-                    R.layout.viewholder_repository,
-                    parent,
-                    false
-                )
+        fun create(
+            parent: ViewGroup,
+            listener: SearchResultAdapter.Listener
+        ): SearchResultViewHolder {
+            val binding = DataBindingUtil.inflate<ViewholderRepositoryBinding>(
+                LayoutInflater.from(parent.context),
+                R.layout.viewholder_repository,
+                parent,
+                false
             )
+            binding.listener = listener
+            return SearchResultViewHolder(binding)
+        }
     }
 
     fun setItem(item: SearchResult?) {

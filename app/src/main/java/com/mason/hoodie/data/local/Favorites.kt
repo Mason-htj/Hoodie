@@ -11,6 +11,6 @@ import android.arch.persistence.room.Entity
 data class Favorites(
     val group: String,
     val artifact: String,
-    val insertedTime: Long,
-    var version: String
+    var version: String = "",
+    val insertedTime: Long = System.currentTimeMillis()
 )

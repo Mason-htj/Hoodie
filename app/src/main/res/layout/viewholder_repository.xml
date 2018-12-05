@@ -3,6 +3,7 @@
 
     <data>
         <variable name="item" type="com.mason.hoodie.ui.SearchResult"/>
+        <variable name="listener" type="com.mason.hoodie.ui.search.SearchResultAdapter.Listener"/>
     </data>
 
     <LinearLayout
@@ -36,6 +37,7 @@
         <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="@{item.favorite}"/>
+                android:checked="@{item.favorite}"
+                android:onCheckedChanged="@{(v, checked) -> checked ? listener.markFavorite(item) : listener.unmarkFavorite(item)}"/>
     </LinearLayout>
 </layout>
