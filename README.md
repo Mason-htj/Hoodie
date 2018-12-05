@@ -6,4 +6,4 @@ Maven Repository Observer
 2. Favorite
 
 ## Architecture
-Kotlin, Koin(IOC), DataBinding, SingleActivity
+Kotlin, Koin(IOC), DataBinding, SingleActivity, RxJava
