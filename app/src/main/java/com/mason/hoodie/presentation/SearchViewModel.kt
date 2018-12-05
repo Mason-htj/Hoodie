@@ -6,6 +6,7 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
 import com.mason.hoodie.data.Document
 import com.mason.hoodie.data.MavenRepository
+import com.mason.hoodie.ui.SearchResult
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -19,7 +20,7 @@ class SearchViewModel(
 ) {
     val isLoadingRepo = ObservableBoolean()
     val resultSize = ObservableInt(-1)
-    val liveRepo = MutableLiveData<List<Document>>()
+    val liveRepo = MutableLiveData<List<SearchResult>>()
 
     private val repositories = ObservableArrayList<Document>()
     private val compositeDisposable = CompositeDisposable()
@@ -34,7 +35,7 @@ class SearchViewModel(
                     repositories.clear()
                     repositories.addAll(it.response.docs)
                     resultSize.set(it.response.numFound)
-                    liveRepo.value = it.response.docs
+                    liveRepo.value = it.response.docs.map { doc -> SearchResult(doc, false) }
                     isLoadingRepo.set(false)
                 },
                 {

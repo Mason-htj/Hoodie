@@ -6,36 +6,35 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.kakao.mason.hoodie.R
 import com.kakao.mason.hoodie.databinding.ViewholderRepositoryBinding
-import com.mason.hoodie.data.Document
 
 /**
  * Created by mason-hong on 28/11/2018.
  */
-class DocumentListAdapter : RecyclerView.Adapter<DocumentViewHolder>() {
-    private val items = ArrayList<Document>()
+class SearchResultAdapter : RecyclerView.Adapter<SearchResultViewHolder>() {
+    private val items = ArrayList<SearchResult>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DocumentViewHolder =
-        DocumentViewHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder =
+        SearchResultViewHolder.create(parent)
 
     override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(viewHolder: DocumentViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: SearchResultViewHolder, position: Int) {
         viewHolder.setItem(items[position])
     }
 
-    fun setItems(items: List<Document>) {
+    fun setItems(items: List<SearchResult>) {
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
     }
 }
 
-class DocumentViewHolder private constructor(
+class SearchResultViewHolder private constructor(
     private val binding: ViewholderRepositoryBinding
 ) : RecyclerView.ViewHolder(binding.root) {
     companion object {
-        fun create(parent: ViewGroup): DocumentViewHolder =
-            DocumentViewHolder(
+        fun create(parent: ViewGroup): SearchResultViewHolder =
+            SearchResultViewHolder(
                 DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
                     R.layout.viewholder_repository,
@@ -45,7 +44,7 @@ class DocumentViewHolder private constructor(
             )
     }
 
-    fun setItem(item: Document?) {
+    fun setItem(item: SearchResult?) {
         binding.item = item
         binding.executePendingBindings()
     }

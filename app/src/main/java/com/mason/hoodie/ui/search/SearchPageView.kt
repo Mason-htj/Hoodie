@@ -6,7 +6,7 @@ import com.kakao.mason.hoodie.R
 import com.kakao.mason.hoodie.databinding.ViewSearchPageBinding
 import com.mason.hoodie.common.inject
 import com.mason.hoodie.presentation.SearchViewModel
-import com.mason.hoodie.ui.DocumentListAdapter
+import com.mason.hoodie.ui.SearchResultAdapter
 import com.mason.hoodie.ui.base.BasePageView
 import com.mason.hoodie.ui.main.MainActivity
 
@@ -15,7 +15,7 @@ import com.mason.hoodie.ui.main.MainActivity
  */
 class SearchPageView(activity: MainActivity) : BasePageView(activity) {
     private val viewModel: SearchViewModel by inject()
-    private val adapter = DocumentListAdapter()
+    private val adapter = SearchResultAdapter()
 
     override fun onCreate() {
         super.onCreate()
