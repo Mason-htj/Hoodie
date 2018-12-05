@@ -6,7 +6,6 @@ import com.kakao.mason.hoodie.R
 import com.kakao.mason.hoodie.databinding.ViewSearchPageBinding
 import com.mason.hoodie.common.inject
 import com.mason.hoodie.presentation.SearchViewModel
-import com.mason.hoodie.ui.SearchResultAdapter
 import com.mason.hoodie.ui.base.BasePageView
 import com.mason.hoodie.ui.main.MainActivity
 
