@@ -4,8 +4,8 @@ import android.arch.lifecycle.MutableLiveData
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
-import com.mason.hoodie.data.Document
-import com.mason.hoodie.data.MavenRepository
+import com.mason.hoodie.data.remote.Document
+import com.mason.hoodie.data.remote.MavenRepository
 import com.mason.hoodie.ui.SearchResult
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

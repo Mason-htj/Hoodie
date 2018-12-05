@@ -1,4 +1,4 @@
-package com.mason.hoodie.data
+package com.mason.hoodie.data.remote
 
 import com.mason.hoodie.common.SIZE_DEFAULT
 import io.reactivex.Single

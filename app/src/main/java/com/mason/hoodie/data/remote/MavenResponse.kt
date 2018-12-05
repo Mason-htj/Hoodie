@@ -1,4 +1,4 @@
-package com.mason.hoodie.data
+package com.mason.hoodie.data.remote
 
 import com.google.gson.annotations.SerializedName
 

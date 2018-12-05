@@ -1,6 +1,6 @@
 package com.mason.hoodie
 
-import com.mason.hoodie.data.MavenRepository
+import com.mason.hoodie.data.remote.MavenRepository
 import com.mason.hoodie.ioc.repositoryModule
 import org.junit.Test
 import org.koin.standalone.StandAloneContext.startKoin

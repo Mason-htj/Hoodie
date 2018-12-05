@@ -1,6 +1,6 @@
 package com.mason.hoodie.ioc
 
-import com.mason.hoodie.data.MavenRepository
+import com.mason.hoodie.data.remote.MavenRepository
 import com.mason.hoodie.presentation.SearchViewModel
 import org.koin.dsl.module.module
 

@@ -1,4 +1,4 @@
-package com.mason.hoodie.data
+package com.mason.hoodie.data.local
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase

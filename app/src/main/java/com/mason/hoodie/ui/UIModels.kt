@@ -1,6 +1,6 @@
 package com.mason.hoodie.ui
 
-import com.mason.hoodie.data.Document
+import com.mason.hoodie.data.remote.Document
 
 /**
  * Created by mason-hong on 05/12/2018.
