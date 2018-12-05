@@ -6,9 +6,10 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
 import com.mason.hoodie.data.Document
 import com.mason.hoodie.data.MavenRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by mason-hong on 29/11/2018.
@@ -21,22 +22,24 @@ class SearchViewModel(
     val liveRepo = MutableLiveData<List<Document>>()
 
     private val repositories = ObservableArrayList<Document>()
+    private val compositeDisposable = CompositeDisposable()
 
     fun search(query: String) {
         isLoadingRepo.set(true)
-        GlobalScope.launch {
-            try {
-                val result = mavenRepo.getArtifactsAndGroup(query).await()
-                launch(Dispatchers.Main) {
+        mavenRepo.getArtifactsAndGroup(query)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
                     repositories.clear()
-                    repositories.addAll(result.response.docs)
-                    resultSize.set(result.response.numFound)
-                    liveRepo.value = result.response.docs
+                    repositories.addAll(it.response.docs)
+                    resultSize.set(it.response.numFound)
+                    liveRepo.value = it.response.docs
+                    isLoadingRepo.set(false)
+                },
+                {
+                    isLoadingRepo.set(false)
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            isLoadingRepo.set(false)
-        }
+            ).addTo(compositeDisposable)
     }
 }

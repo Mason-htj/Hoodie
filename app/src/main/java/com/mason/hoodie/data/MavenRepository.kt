@@ -1,12 +1,11 @@
 package com.mason.hoodie.data
 
-import android.support.annotation.WorkerThread
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.mason.hoodie.common.SIZE_DEFAULT
-import kotlinx.coroutines.Deferred
+import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
@@ -17,27 +16,23 @@ class MavenRepository {
         .baseUrl("https://search.maven.org/")
         .client(
             OkHttpClient.Builder()
-//                .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
+                .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
                 .build()
         )
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
         .create(MavenService::class.java)
 
-    @WorkerThread
-    fun getGroups(group: String): Deferred<MavenResponse> =
+    fun getGroups(group: String): Single<MavenResponse> =
         mavenService.searchRepositories("g:\"$group\"", SIZE_DEFAULT)
 
-    @WorkerThread
-    fun getArtifacts(artifact: String): Deferred<MavenResponse> =
+    fun getArtifacts(artifact: String): Single<MavenResponse> =
         mavenService.searchRepositories("a:\"$artifact\"", SIZE_DEFAULT)
 
-    @WorkerThread
-    fun getArtifactsWithGroup(group: String, artifact: String): Deferred<MavenResponse> =
+    fun getArtifactsWithGroup(group: String, artifact: String): Single<MavenResponse> =
         mavenService.searchRepositories("g:\"$group\" AND a:\"$artifact\"", SIZE_DEFAULT)
 
-    @WorkerThread
-    fun getArtifactsAndGroup(name: String): Deferred<MavenResponse> =
+    fun getArtifactsAndGroup(name: String): Single<MavenResponse> =
         mavenService.searchRepositories(name, SIZE_DEFAULT)
 }

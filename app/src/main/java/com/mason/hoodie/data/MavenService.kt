@@ -1,7 +1,6 @@
 package com.mason.hoodie.data
 
-import com.mason.hoodie.data.MavenResponse
-import kotlinx.coroutines.Deferred
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,5 +12,5 @@ interface MavenService {
     fun searchRepositories(
         @Query("q") group: String,
         @Query("row") size: Int
-    ): Deferred<MavenResponse>
+    ): Single<MavenResponse>
 }
