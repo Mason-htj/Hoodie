@@ -80,4 +80,8 @@ class SearchViewModel(
                 }
             ).addTo(compositeDisposable)
     }
+
+    fun onDestroy() {
+        compositeDisposable.clear()
+    }
 }
