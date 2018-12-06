@@ -49,38 +49,6 @@ class SearchViewModel(
             ).addTo(compositeDisposable)
     }
 
-    fun markFavorite(document: Document) {
-        Completable.defer {
-            database.favoritesDao().insert(Favorites(document.group, document.artifact, document.latestVersion))
-            return@defer CompletableSource { }
-        }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    // 성공
-                },
-                {
-                    // 실패
-                }
-            ).addTo(compositeDisposable)
-    }
-
-    fun unmarkFavorite(document: Document) {
-        Completable.defer {
-            database.favoritesDao().delete(Favorites(document.group, document.artifact))
-            return@defer CompletableSource { }
-        }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    // 성공
-                },
-                {
-                    // 실패
-                }
-            ).addTo(compositeDisposable)
-    }
-
     fun onDestroy() {
         compositeDisposable.clear()
     }

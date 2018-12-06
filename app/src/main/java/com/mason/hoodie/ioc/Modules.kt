@@ -23,6 +23,6 @@ val databaseModule = module {
 }
 
 val viewModelModule = module {
-    factory { SearchViewModel(get(), get()) }
-    factory { FavoritesViewModel(get(), get()) }
+    single { SearchViewModel(get(), get()) }
+    single { FavoritesViewModel(get(), get()) }
 }
