@@ -8,7 +8,6 @@ import com.mason.hoodie.data.local.Favorites
 import com.mason.hoodie.data.remote.Document
 import com.mason.hoodie.data.remote.MavenRepository
 import io.reactivex.Completable
-import io.reactivex.CompletableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo

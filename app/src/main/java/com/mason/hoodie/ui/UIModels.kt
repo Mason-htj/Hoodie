@@ -7,5 +7,5 @@ import com.mason.hoodie.data.remote.Document
  */
 data class SearchResult(
     val document: Document,
-    val isFavorite: Boolean
+    var isFavorite: Boolean
 )

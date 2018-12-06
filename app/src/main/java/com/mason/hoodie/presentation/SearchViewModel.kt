@@ -1,18 +1,18 @@
 package com.mason.hoodie.presentation
 
 import android.arch.lifecycle.MutableLiveData
-import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
+import com.mason.hoodie.common.hasFavorites
 import com.mason.hoodie.data.local.AppDatabase
 import com.mason.hoodie.data.local.Favorites
-import com.mason.hoodie.data.remote.Document
 import com.mason.hoodie.data.remote.MavenRepository
+import com.mason.hoodie.data.remote.MavenResponse
 import com.mason.hoodie.ui.SearchResult
-import io.reactivex.Completable
-import io.reactivex.CompletableSource
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.BiFunction
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
@@ -27,20 +27,24 @@ class SearchViewModel(
     val resultSize = ObservableInt(-1)
     val liveRepo = MutableLiveData<List<SearchResult>>()
 
-    private val repositories = ObservableArrayList<Document>()
     private val compositeDisposable = CompositeDisposable()
 
     fun search(query: String) {
         isLoadingRepo.set(true)
-        mavenRepo.getArtifactsAndGroup(query)
-            .subscribeOn(Schedulers.io())
+        Single.zip(
+            mavenRepo.getArtifactsAndGroup(query),
+            database.favoritesDao().getAll(),
+            BiFunction<MavenResponse, List<Favorites>, Pair<Int, List<SearchResult>>> { response, favorites ->
+                Pair(
+                    response.response.numFound,
+                    response.response.docs.map { SearchResult(it, it.hasFavorites(favorites)) })
+            }
+        ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    repositories.clear()
-                    repositories.addAll(it.response.docs)
-                    resultSize.set(it.response.numFound)
-                    liveRepo.value = it.response.docs.map { doc -> SearchResult(doc, false) }
+                    resultSize.set(it.first)
+                    liveRepo.value = it.second
                     isLoadingRepo.set(false)
                 },
                 {
