@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
         val viewPages = listOf(
-            FavoritePageView(this),
-            SearchPageView(this)
+                FavoritePageView(this),
+                SearchPageView(this)
         )
         binding.viewPager.adapter = MainPagerAdapter(viewPages)
         binding.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout))

@@ -17,8 +17,8 @@ import io.reactivex.schedulers.Schedulers
  * Created by mason-hong on 06/12/2018.
  */
 class FavoritesViewModel(
-    private val mavenRepo: MavenRepository,
-    private val database: AppDatabase
+        private val mavenRepo: MavenRepository,
+        private val database: AppDatabase
 ) {
     val isLoading = ObservableBoolean(false)
     val resultSize = ObservableInt(-1)
@@ -29,18 +29,18 @@ class FavoritesViewModel(
     fun loadFavorites() {
         isLoading.set(true)
         database.favoritesDao().getAll()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    resultSize.set(it.size)
-                    favorites.value = it
-                    isLoading.set(false)
-                },
-                {
-                    isLoading.set(false)
-                }
-            ).addTo(compositeDisposable)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            resultSize.set(it.size)
+                            favorites.value = it
+                            isLoading.set(false)
+                        },
+                        {
+                            isLoading.set(false)
+                        }
+                ).addTo(compositeDisposable)
     }
 
     fun markFavorite(document: Document) {
@@ -48,16 +48,16 @@ class FavoritesViewModel(
             database.favoritesDao().insert(Favorites(document.group, document.artifact, document.latestVersion))
             Completable.complete()
         }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    // 성공
-                    loadFavorites()
-                },
-                {
-                    // 실패
-                }
-            ).addTo(compositeDisposable)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            // 성공
+                            loadFavorites()
+                        },
+                        {
+                            // 실패
+                        }
+                ).addTo(compositeDisposable)
     }
 
     fun unmarkFavorite(group: String, artifact: String) {
@@ -65,16 +65,16 @@ class FavoritesViewModel(
             database.favoritesDao().delete(Favorites(group, artifact))
             Completable.complete()
         }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    // 성공
-                    loadFavorites()
-                },
-                {
-                    // 실패
-                }
-            ).addTo(compositeDisposable)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            // 성공
+                            loadFavorites()
+                        },
+                        {
+                            // 실패
+                        }
+                ).addTo(compositeDisposable)
     }
 
     fun onDestroy() {

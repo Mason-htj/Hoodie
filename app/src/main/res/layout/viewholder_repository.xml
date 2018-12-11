@@ -2,42 +2,48 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="item" type="com.mason.hoodie.ui.SearchResult"/>
-        <variable name="listener" type="com.mason.hoodie.ui.search.SearchResultAdapter.Listener"/>
+
+        <variable
+            name="item"
+            type="com.mason.hoodie.ui.SearchResult" />
+
+        <variable
+            name="listener"
+            type="com.mason.hoodie.ui.search.SearchResultAdapter.Listener" />
     </data>
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <LinearLayout
-                android:layout_width="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:text="@{String.format(@string/document_group, item.document.group)}" />
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{String.format(@string/document_group, item.document.group)}"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.format(@string/document_artifact, item.document.artifact)}" />
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{String.format(@string/document_artifact, item.document.artifact)}"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{String.format(@string/document_latestVersion, item.document.latestVersion)}"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.format(@string/document_latestVersion, item.document.latestVersion)}" />
         </LinearLayout>
 
         <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="@{item.favorite}"
-                android:onCheckedChanged="@{(v, checked) -> checked ? listener.markFavorite(item) : listener.unmarkFavorite(item)}"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@{item.favorite}"
+            android:onCheckedChanged="@{(v, checked) -> checked ? listener.markFavorite(item) : listener.unmarkFavorite(item)}" />
     </LinearLayout>
 </layout>

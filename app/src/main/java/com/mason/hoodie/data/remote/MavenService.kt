@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface MavenService {
     @GET("solrsearch/select?wt=json")
     fun searchRepositories(
-        @Query("q") group: String,
-        @Query("row") size: Int
+            @Query("q") group: String,
+            @Query("row") size: Int
     ): Single<MavenResponse>
 }

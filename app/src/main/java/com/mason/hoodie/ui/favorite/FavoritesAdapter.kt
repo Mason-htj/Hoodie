@@ -15,7 +15,7 @@ class FavoritesAdapter(private val listener: Listener) : RecyclerView.Adapter<Fa
     private val items = ArrayList<Favorites>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder =
-        FavoritesViewHolder.create(parent, listener)
+            FavoritesViewHolder.create(parent, listener)
 
     override fun getItemCount(): Int = items.size
 

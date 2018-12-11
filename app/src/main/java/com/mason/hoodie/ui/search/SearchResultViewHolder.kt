@@ -12,18 +12,18 @@ import com.mason.hoodie.ui.SearchResult
  * Created by mason-hong on 05/12/2018.
  */
 class SearchResultViewHolder private constructor(
-    private val binding: ViewholderRepositoryBinding
+        private val binding: ViewholderRepositoryBinding
 ) : RecyclerView.ViewHolder(binding.root) {
     companion object {
         fun create(
-            parent: ViewGroup,
-            listener: SearchResultAdapter.Listener
+                parent: ViewGroup,
+                listener: SearchResultAdapter.Listener
         ): SearchResultViewHolder {
             val binding = DataBindingUtil.inflate<ViewholderRepositoryBinding>(
-                LayoutInflater.from(parent.context),
-                R.layout.viewholder_repository,
-                parent,
-                false
+                    LayoutInflater.from(parent.context),
+                    R.layout.viewholder_repository,
+                    parent,
+                    false
             )
             binding.listener = listener
             return SearchResultViewHolder(binding)

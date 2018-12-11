@@ -20,8 +20,8 @@ import io.reactivex.schedulers.Schedulers
  * Created by mason-hong on 29/11/2018.
  */
 class SearchViewModel(
-    private val mavenRepo: MavenRepository,
-    private val database: AppDatabase
+        private val mavenRepo: MavenRepository,
+        private val database: AppDatabase
 ) {
     val isLoadingRepo = ObservableBoolean()
     val resultSize = ObservableInt(-1)
@@ -32,25 +32,25 @@ class SearchViewModel(
     fun search(query: String) {
         isLoadingRepo.set(true)
         Single.zip(
-            mavenRepo.getArtifactsAndGroup(query),
-            database.favoritesDao().getAll(),
-            BiFunction<MavenResponse, List<Favorites>, Pair<Int, List<SearchResult>>> { response, favorites ->
-                Pair(
-                    response.response.numFound,
-                    response.response.docs.map { SearchResult(it, it.hasFavorites(favorites)) })
-            }
-        ).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    resultSize.set(it.first)
-                    liveRepo.value = it.second
-                    isLoadingRepo.set(false)
-                },
-                {
-                    isLoadingRepo.set(false)
+                mavenRepo.getArtifactsAndGroup(query),
+                database.favoritesDao().getAll(),
+                BiFunction<MavenResponse, List<Favorites>, Pair<Int, List<SearchResult>>> { response, favorites ->
+                    Pair(
+                            response.response.numFound,
+                            response.response.docs.map { SearchResult(it, it.hasFavorites(favorites)) })
                 }
-            ).addTo(compositeDisposable)
+        ).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            resultSize.set(it.first)
+                            liveRepo.value = it.second
+                            isLoadingRepo.set(false)
+                        },
+                        {
+                            isLoadingRepo.set(false)
+                        }
+                ).addTo(compositeDisposable)
     }
 
     fun onDestroy() {

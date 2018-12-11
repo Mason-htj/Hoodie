@@ -12,9 +12,9 @@ import com.mason.hoodie.ui.main.MainActivity
  * Created by mason-hong on 29/11/2018.
  */
 abstract class BaseView(val activity: MainActivity) :
-    LifecycleOwner,
-    LifecycleObserver,
-    View.OnAttachStateChangeListener {
+        LifecycleOwner,
+        LifecycleObserver,
+        View.OnAttachStateChangeListener {
 
     val container = FrameLayout(activity)
     var contentView: View? = null
@@ -45,10 +45,10 @@ abstract class BaseView(val activity: MainActivity) :
     }
 
     protected fun <T : ViewDataBinding> bindingView(id: Int) = DataBindingUtil.inflate<T>(
-        LayoutInflater.from(activity),
-        id,
-        container,
-        true
+            LayoutInflater.from(activity),
+            id,
+            container,
+            true
     ).also { contentView = it.root }!!
 
     override fun onViewDetachedFromWindow(v: View?) {

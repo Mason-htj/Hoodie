@@ -16,7 +16,7 @@ class SearchResultAdapter(private val listener: Listener) : RecyclerView.Adapter
     private val items = ArrayList<SearchResult>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder =
-        SearchResultViewHolder.create(parent, listener)
+            SearchResultViewHolder.create(parent, listener)
 
     override fun getItemCount(): Int = items.size
 
