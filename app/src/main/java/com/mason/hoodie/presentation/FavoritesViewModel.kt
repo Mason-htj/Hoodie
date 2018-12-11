@@ -60,9 +60,9 @@ class FavoritesViewModel(
             ).addTo(compositeDisposable)
     }
 
-    fun unmarkFavorite(document: Document) {
+    fun unmarkFavorite(group: String, artifact: String) {
         Completable.defer {
-            database.favoritesDao().delete(Favorites(document.group, document.artifact))
+            database.favoritesDao().delete(Favorites(group, artifact))
             Completable.complete()
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

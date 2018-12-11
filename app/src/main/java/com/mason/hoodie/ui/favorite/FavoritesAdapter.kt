@@ -9,6 +9,7 @@ import com.mason.hoodie.data.local.Favorites
  */
 class FavoritesAdapter(private val listener: Listener) : RecyclerView.Adapter<FavoritesViewHolder>() {
     interface Listener {
+        fun onDeleteClick(item: Favorites)
     }
 
     private val items = ArrayList<Favorites>()

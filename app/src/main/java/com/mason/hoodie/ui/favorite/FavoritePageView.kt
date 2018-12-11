@@ -5,6 +5,7 @@ import android.support.v7.widget.DividerItemDecoration
 import com.kakao.mason.hoodie.R
 import com.kakao.mason.hoodie.databinding.ViewFavoritesPageBinding
 import com.mason.hoodie.common.inject
+import com.mason.hoodie.data.local.Favorites
 import com.mason.hoodie.presentation.FavoritesViewModel
 import com.mason.hoodie.ui.base.BasePageView
 import com.mason.hoodie.ui.main.MainActivity
@@ -27,6 +28,10 @@ class FavoritePageView(activity: MainActivity) : BasePageView(activity), Favorit
             adapter.setItems(it ?: emptyList())
         })
         viewModel.loadFavorites()
+    }
+
+    override fun onDeleteClick(item: Favorites) {
+        viewModel.unmarkFavorite(item.group, item.artifact)
     }
 
     override fun getTitle(): String = "Favorite"

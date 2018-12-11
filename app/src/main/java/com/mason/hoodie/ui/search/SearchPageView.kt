@@ -39,7 +39,7 @@ class SearchPageView(activity: MainActivity) : BasePageView(activity), SearchRes
     }
 
     override fun unmarkFavorite(item: SearchResult) {
-        favoritesViewModel.unmarkFavorite(item.document)
+        favoritesViewModel.unmarkFavorite(item.document.group, item.document.artifact)
     }
 
     override fun onDestroy() {
